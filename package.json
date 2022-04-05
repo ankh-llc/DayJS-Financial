@@ -1,0 +1,26 @@
+{
+  "name": "dayjs-financialdate",
+  "version": "1.0.0",
+  "description": "financial plugin for dayjs",
+  "main": "FinantialPlugin.js",
+  "scripts": {
+    "test": "npx vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flexphere/dayjs-financial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "types": "./FinantialPlugin.d.ts",
+  "bugs": {
+    "url": "https://github.com/flexphere/dayjs-financial/issues"
+  },
+  "homepage": "https://github.com/flexphere/dayjs-financial#readme",
+  "devDependencies": {
+    "c8": "^7.11.0",
+    "dayjs": "^1.11.0",
+    "vitest": "^0.8.4"
+  }
+}
