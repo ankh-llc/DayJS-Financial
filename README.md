@@ -29,4 +29,4 @@ dayjs.extend(FinancialYearQuarter(7)) // July
 ```
 
 ### Contributers
- ![aaaa](https://contrib.rocks/image?repo=ankh-llc/DayJS-Financial)
+ ![contributers](https://contrib.rocks/image?repo=ankh-llc/DayJS-Financial)
