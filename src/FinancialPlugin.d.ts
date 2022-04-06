@@ -2,7 +2,7 @@ import { PluginFunc, ConfigType, QUnitType } from 'dayjs';
 
 export type FUnitType = QUnitType | 'financialYear' | 'financialQuarter';
 
-declare const plugin: PluginFunc;
+declare const plugin: (financialStartMonth?: number) => PluginFunc;
 export = plugin;
 
 declare module 'dayjs' {
