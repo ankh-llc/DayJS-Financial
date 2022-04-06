@@ -15,10 +15,8 @@ export default (financialStartMonth=4) => {
     const oldStartOf = dayjsClass.prototype.startOf;
     dayjsClass.prototype.startOf = function (units, startOf) {
       if (units === "financialYear") {
-        if (this.financialQuarter() === 4) {
-          return oldStartOf.bind(this.startOf("financialQuarter"))("year").month(zeroBasedMonth);
-        }
-        return oldStartOf.bind(this)("year").month(zeroBasedMonth);
+        const subMonth = (this.financialQuarter() - 1) * 3;
+        return oldStartOf.bind(this.subtract(subMonth, "month").month(zeroBasedMonth))("month");
       }
   
       if (units === "financialQuarter") {

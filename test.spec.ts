@@ -10,6 +10,7 @@ describe('financial plugin @ april', () => {
   test.concurrent('financialYear', () => {
     expect(dayjs('2022-04-01').financialYear()).toBe(2022);
     expect(dayjs('2022-03-31').financialYear()).toBe(2021);
+    expect(dayjs('2022-02-10').financialYear()).toBe(2021);
   });
 
   test.concurrent('financialQuarter', () => {
@@ -59,6 +60,11 @@ describe('financial plugin @ april', () => {
 
   test.concurrent('startOf financialYear', () => {
     let actual, expected;
+
+    actual = dayjs('2022-02-21').startOf('financialYear').toISOString();
+    expected = dayjs('2021-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
     actual = dayjs('2022-04-21').startOf('financialYear').toISOString();
     expected = dayjs('2022-04-01').startOf('day').toISOString();
     expect(actual).toBe(expected);
