@@ -6,8 +6,8 @@
   "module": "./dist/financial-plugin.min.js",
   "exports": {
     ".": {
-        "import": "./dist/financial-plugin.min.js",
-        "require": "./dist/financial-plugin.min.cjs"
+      "import": "./dist/financial-plugin.min.js",
+      "require": "./dist/financial-plugin.min.cjs"
     }
   },
   "scripts": {
@@ -33,10 +33,31 @@
     "url": "https://github.com/ankh-llc/dayjs-financial/issues"
   },
   "homepage": "https://github.com/ankh-llc/dayjs-financial#readme",
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      ["@semantic-release/git", {
+        "assets": [
+          "dist/financial-plugin.min.js",
+          "dist/financial-plugin.min.js.map",
+          "dist/financial-plugin.min.cjs",
+          "dist/financial-plugin.min.cjs.map"
+        ]
+      }],
+      "@semantic-release/github",
+      "@semantic-release/npm"
+    ]
+  },
   "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^8.0.4",
     "c8": "^7.11.0",
     "dayjs": "^1.11.0",
     "esbuild": "^0.14.31",
+    "semantic-release": "^19.0.2",
     "vitest": "^0.8.4"
   }
 }
