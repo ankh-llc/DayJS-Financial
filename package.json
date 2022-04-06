@@ -2,16 +2,17 @@
   "name": "dayjs-financialdate",
   "version": "1.0.0",
   "description": "financial plugin for dayjs",
-  "main": "FinantialPlugin.js",
+  "main": "src/FinantialPlugin.js",
   "scripts": {
-    "test": "npx vitest"
+    "test": "npx vitest",
+    "build": ""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flexphere/dayjs-financial.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["dayjs", "financial", "quarter"],
+  "author": "taiki katayama",
   "license": "MIT",
   "types": "./FinantialPlugin.d.ts",
   "bugs": {
