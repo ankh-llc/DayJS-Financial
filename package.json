@@ -1,11 +1,18 @@
 {
   "name": "dayjs-financialdate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "financial plugin for dayjs",
-  "main": "./dist/financial-plugin.min.js",
+  "main": "./dist/financial-plugin.min.cjs",
+  "module": "./dist/financial-plugin.min.js",
+  "exports": {
+    ".": {
+        "import": "./dist/financial-plugin.min.js",
+        "require": "./dist/financial-plugin.min.cjs"
+    }
+  },
   "scripts": {
     "test": "npx vitest",
-    "build": "npx esbuild --minify --sourcemap=external --outfile=./dist/financial-plugin.min.js src/FinancialPlugin.js"
+    "build": "npx esbuild --minify --sourcemap=external --outfile=./dist/financial-plugin.min.cjs --target=es2015 --format=cjs src/FinancialPlugin.js && npx esbuild --minify --sourcemap=external --outfile=./dist/financial-plugin.min.js --target=es2015 --format=esm src/FinancialPlugin.js"
   },
   "repository": {
     "type": "git",
