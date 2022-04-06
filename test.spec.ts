@@ -1,73 +1,218 @@
 import dayjs from 'dayjs';
-import plugin from './FinantialPlugin';
-import { test, expect } from 'vitest';
-dayjs.extend(plugin);
+import plugin from './src/FinancialPlugin';
+import { describe, test, expect, beforeAll } from 'vitest';
 
-test('endOf financialYear', () => {
-  const april = dayjs('2022-04-01').endOf('financialYear').toISOString();
-  expect(april).toBe(dayjs('2023-03-31').endOf('day').toISOString()); // first month of first quarter     => 2022-06-30
+describe('financial plugin @ april', () => {
+  beforeAll(() => {
+    dayjs.extend(plugin(4));
+  });
 
-  const may = dayjs('2022-05-01').endOf('financialYear').toISOString();
-  expect(may).toBe(dayjs('2023-03-31').endOf('day').toISOString()); // first month of first quarter     => 2022-06-30
+  test.concurrent('financialYear', () => {
+    expect(dayjs('2022-04-01').financialYear()).toBe(2022);
+    expect(dayjs('2022-03-31').financialYear()).toBe(2021);
+  });
 
-  const sep = dayjs('2023-08-01').endOf('financialYear').toISOString();
-  expect(sep).toBe(dayjs('2024-03-31').endOf('day').toISOString()); // second month of second quarter   => 2022-09-30
+  test.concurrent('financialQuarter', () => {
+    expect(dayjs('2022-04-01').financialQuarter()).toBe(1);
+    expect(dayjs('2023-05-01').financialQuarter()).toBe(1);
+    expect(dayjs('2024-08-01').financialQuarter()).toBe(2);
+    expect(dayjs('2025-12-01').financialQuarter()).toBe(3);
+  });
 
-  const dec = dayjs('2024-12-01').endOf('financialYear').toISOString();
-  expect(dec).toBe(dayjs('2025-03-31').endOf('day').toISOString()); // third month of third quarter     => 2022-12-31
+  test.concurrent('endOf financialYear', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-01').endOf('financialYear').toISOString();
+    expected = dayjs('2023-03-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-05-01').endOf('financialYear').toISOString();
+    expected = dayjs('2023-03-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2023-08-01').endOf('financialYear').toISOString();
+    expected = dayjs('2024-03-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2024-12-01').endOf('financialYear').toISOString();
+    expected = dayjs('2025-03-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
+
+  test.concurrent('endOf financialQuarter', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-06-30').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-05-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-06-30').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-08-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-09-30').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-12-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-12-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
+
+  test.concurrent('startOf financialYear', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-05-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-08-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-12-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
+
+  test.concurrent('startOf financialQuarter', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-05-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-08-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-07-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-12-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-10-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
+
+  test.concurrent('isSame financialYear', () => {
+    expect(dayjs('2022-04-21').isSame('2022-06-30', 'financialYear')).toBe(true);
+    expect(dayjs('2021-03-21').isSame('2022-06-30', 'financialYear')).toBe(false);
+    expect(dayjs('2022-12-21').isSame('2023-04-01', 'financialYear')).toBe(false);
+  });
+
+  test.concurrent('isSame financialQuarter', () => {
+    expect(dayjs('2022-04-21').isSame('2022-06-30', 'financialQuarter')).toBe(true);
+    expect(dayjs('2021-03-21').isSame('2022-06-30', 'financialQuarter')).toBe(false);
+    expect(dayjs('2022-12-21').isSame('2023-10-01', 'financialQuarter')).toBe(true);
+  });
 });
 
-test('endOf financialQuarter', () => {
-  const april = dayjs('2022-04-01').endOf('financialQuarter').toISOString();
-  expect(april).toBe(dayjs('2022-06-30').endOf('day').toISOString()); // first month of first quarter     => 2022-06-30
+/**
+ * January Based
+ */
+describe('financial plugin @ january', () => {
+  beforeAll(() => {
+    dayjs.extend(plugin(1));
+  });
 
-  const may = dayjs('2022-05-01').endOf('financialQuarter').toISOString();
-  expect(may).toBe(dayjs('2022-06-30').endOf('day').toISOString()); // first month of first quarter     => 2022-06-30
+  test.concurrent('financialYear', () => {
+    expect(dayjs('2022-04-01').financialYear()).toBe(2022);
+    expect(dayjs('2022-03-31').financialYear()).toBe(2022);
+  });
 
-  const sep = dayjs('2022-08-01').endOf('financialQuarter').toISOString();
-  expect(sep).toBe(dayjs('2022-09-30').endOf('day').toISOString()); // second month of second quarter   => 2022-09-30
+  test.concurrent('financialQuarter', () => {
+    expect(dayjs('2022-04-01').financialQuarter()).toBe(2);
+    expect(dayjs('2023-05-01').financialQuarter()).toBe(2);
+    expect(dayjs('2024-08-01').financialQuarter()).toBe(3);
+    expect(dayjs('2025-12-01').financialQuarter()).toBe(4);
+  });
 
-  const dec = dayjs('2022-12-01').endOf('financialQuarter').toISOString();
-  expect(dec).toBe(dayjs('2022-12-31').endOf('day').toISOString()); // third month of third quarter     => 2022-12-31
-});
+  test.concurrent('endOf financialYear', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-01').endOf('financialYear').toISOString();
+    expected = dayjs('2022-12-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-test('startOf financialYear', () => {
-  expect(dayjs('2022-04-21').startOf('financialYear').toISOString()).toBe(
-    dayjs('2022-04-01').startOf('day').toISOString(),
-  ); // first month of first quarter     => 2022-06-30
+    actual = dayjs('2022-05-01').endOf('financialYear').toISOString();
+    expected = dayjs('2022-12-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-  const may = dayjs('2022-05-21').startOf('financialYear').toISOString();
-  expect(may).toBe(dayjs('2022-04-01').startOf('day').toISOString()); // first month of first quarter     => 2022-06-30
+    actual = dayjs('2023-08-01').endOf('financialYear').toISOString();
+    expected = dayjs('2023-12-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-  const sep = dayjs('2022-08-21').startOf('financialYear').toISOString();
-  expect(sep).toBe(dayjs('2022-04-01').startOf('day').toISOString()); // second month of second quarter   => 2022-09-30
+    actual = dayjs('2024-12-01').endOf('financialYear').toISOString();
+    expected = dayjs('2024-12-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
 
-  const dec = dayjs('2022-12-21').startOf('financialYear').toISOString();
-  expect(dec).toBe(dayjs('2022-04-01').startOf('day').toISOString()); // third month of third quarter     => 2022-12-31
-});
+  test.concurrent('endOf financialQuarter', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-06-30').endOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-test('startOf financialQuarter', () => {
-  const april = dayjs('2022-04-21').startOf('financialQuarter').toISOString();
-  expect(april).toBe(dayjs('2022-04-01').startOf('day').toISOString()); // first month of first quarter     => 2022-06-30
+    actual = dayjs('2022-05-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-06-30').endOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-  const may = dayjs('2022-05-21').startOf('financialQuarter').toISOString();
-  expect(may).toBe(dayjs('2022-04-01').startOf('day').toISOString()); // first month of first quarter     => 2022-06-30
+    actual = dayjs('2022-08-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-09-30').endOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-  const sep = dayjs('2022-08-21').startOf('financialQuarter').toISOString();
-  expect(sep).toBe(dayjs('2022-07-01').startOf('day').toISOString()); // second month of second quarter   => 2022-09-30
+    actual = dayjs('2022-12-01').endOf('financialQuarter').toISOString();
+    expected = dayjs('2022-12-31').endOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
 
-  const dec = dayjs('2022-12-21').startOf('financialQuarter').toISOString();
-  expect(dec).toBe(dayjs('2022-10-01').startOf('day').toISOString()); // third month of third quarter     => 2022-12-31
-});
+  test.concurrent('startOf financialYear', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-01-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-test('isSame financialYear', () => {
-  expect(dayjs('2022-04-21').isSame('2022-06-30', 'financialYear')).toBe(true);
-  expect(dayjs('2021-03-21').isSame('2022-06-30', 'financialYear')).toBe(false);
-  expect(dayjs('2022-12-21').isSame('2023-04-01', 'financialYear')).toBe(false);
-});
+    actual = dayjs('2022-05-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-01-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
 
-test('isSame financialQuarter', () => {
-  expect(dayjs('2022-04-21').isSame('2022-06-30', 'financialQuarter')).toBe(true);
-  expect(dayjs('2021-03-21').isSame('2022-06-30', 'financialQuarter')).toBe(false);
-  expect(dayjs('2022-12-21').isSame('2023-10-01', 'financialQuarter')).toBe(true);
+    actual = dayjs('2022-08-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-01-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-12-21').startOf('financialYear').toISOString();
+    expected = dayjs('2022-01-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
+
+  test.concurrent('startOf financialQuarter', () => {
+    let actual, expected;
+    actual = dayjs('2022-04-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-05-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-04-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-08-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-07-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+
+    actual = dayjs('2022-12-21').startOf('financialQuarter').toISOString();
+    expected = dayjs('2022-10-01').startOf('day').toISOString();
+    expect(actual).toBe(expected);
+  });
+
+  test.concurrent('isSame financialYear', () => {
+    expect(dayjs('2022-04-21').isSame('2022-06-30', 'financialYear')).toBe(true);
+    expect(dayjs('2021-03-21').isSame('2022-06-30', 'financialYear')).toBe(false);
+    expect(dayjs('2022-12-21').isSame('2023-04-01', 'financialYear')).toBe(false);
+  });
+
+  test.concurrent('isSame financialQuarter', () => {
+    expect(dayjs('2022-04-21').isSame('2022-06-30', 'financialQuarter')).toBe(true);
+    expect(dayjs('2021-03-21').isSame('2022-06-30', 'financialQuarter')).toBe(false);
+    expect(dayjs('2022-12-21').isSame('2023-10-01', 'financialQuarter')).toBe(true);
+  });
 });
