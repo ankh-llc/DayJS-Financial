@@ -1,24 +1,30 @@
 {
   "name": "dayjs-financialdate",
-  "version": "1.0.0",
+  "version": "0.1.1",
   "description": "financial plugin for dayjs",
-  "main": "src/FinantialPlugin.js",
+  "main": "./src/FinancialPlugin.js",
   "scripts": {
-    "test": "npx vitest",
-    "build": ""
+    "test": "npx vitest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/flexphere/dayjs-financial.git"
+    "url": "git+https://github.com/ankh-llc/dayjs-financial.git"
   },
-  "keywords": ["dayjs", "financial", "quarter"],
+  "keywords": [
+    "dayjs",
+    "financial",
+    "quarter",
+    "year",
+    "date",
+    "business"
+  ],
   "author": "taiki katayama",
   "license": "MIT",
-  "types": "./FinantialPlugin.d.ts",
+  "types": "./src/FinancialPlugin.d.ts",
   "bugs": {
-    "url": "https://github.com/flexphere/dayjs-financial/issues"
+    "url": "https://github.com/ankh-llc/dayjs-financial/issues"
   },
-  "homepage": "https://github.com/flexphere/dayjs-financial#readme",
+  "homepage": "https://github.com/ankh-llc/dayjs-financial#readme",
   "devDependencies": {
     "c8": "^7.11.0",
     "dayjs": "^1.11.0",
