@@ -28,5 +28,5 @@ dayjs.extend(FinancialYearQuarter(1)) // January
 dayjs.extend(FinancialYearQuarter(7)) // July
 ```
 
-### Contributers
+### Contributors
  ![contributers](https://contrib.rocks/image?repo=ankh-llc/DayJS-Financial)
