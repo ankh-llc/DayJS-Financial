@@ -1,14 +1,12 @@
-name: Release
+name: Test
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  release:
-    name: Publish Package
+  test:
+    name: Run Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,18 +14,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-
+      
       - name: Install dependencies
         run: npm install
 
       - name: Run Tests
         run: npm run test
 
-      - name: Build
+      - name: Run Build
         run: npm run build
-
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB }}
-          NPM_TOKEN: ${{ secrets.NPM }}
-        run: npx semantic-release
