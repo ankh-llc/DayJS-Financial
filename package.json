@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "npx vitest",
-    "build": "npx esbuild --minify --sourcemap=external --outfile=./dist/financial-plugin.min.cjs --target=es2015 --format=cjs src/FinancialPlugin.js && npx esbuild --minify --sourcemap=external --outfile=./dist/financial-plugin.min.js --target=es2015 --format=esm src/FinancialPlugin.js"
+    "build": "node esbuild.js"
   },
   "repository": {
     "type": "git",
