@@ -1,6 +1,6 @@
 {
   "name": "dayjs-financialdate",
-  "version": "0.1.4",
+  "version": "1.0.2",
   "description": "financial plugin for dayjs",
   "main": "./dist/financial-plugin.min.cjs",
   "module": "./dist/financial-plugin.min.js",
