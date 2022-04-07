@@ -41,17 +41,7 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/changelog",
       "@semantic-release/npm",
-      [
-        "@semantic-release/git",
-        {
-          "assets": [
-            "dist/financial-plugin.min.js",
-            "dist/financial-plugin.min.js.map",
-            "dist/financial-plugin.min.cjs",
-            "dist/financial-plugin.min.cjs.map"
-          ]
-        }
-      ],
+      "@semantic-release/git",
       "@semantic-release/github"
     ]
   },
