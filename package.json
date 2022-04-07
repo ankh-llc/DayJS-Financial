@@ -39,16 +39,20 @@
     ],
     "plugins": [
       "@semantic-release/commit-analyzer",
-      ["@semantic-release/git", {
-        "assets": [
-          "dist/financial-plugin.min.js",
-          "dist/financial-plugin.min.js.map",
-          "dist/financial-plugin.min.cjs",
-          "dist/financial-plugin.min.cjs.map"
-        ]
-      }],
-      "@semantic-release/github",
-      "@semantic-release/npm"
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "dist/financial-plugin.min.js",
+            "dist/financial-plugin.min.js.map",
+            "dist/financial-plugin.min.cjs",
+            "dist/financial-plugin.min.cjs.map"
+          ]
+        }
+      ],
+      "@semantic-release/github"
     ]
   },
   "devDependencies": {
@@ -59,5 +63,8 @@
     "esbuild": "^0.14.31",
     "semantic-release": "^19.0.2",
     "vitest": "^0.8.4"
+  },
+  "dependencies": {
+    "@semantic-release/changelog": "^6.0.1"
   }
 }
