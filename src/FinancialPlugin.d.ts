@@ -1,14 +1,16 @@
-import { PluginFunc, ConfigType, QUnitType } from 'dayjs';
+import { PluginFunc, ConfigType, QUnitType } from "dayjs";
 
 declare const plugin: (financialStartMonth?: number) => PluginFunc;
 export = plugin;
 
-type FUnitType = QUnitType | 'financialYear' | 'financialQuarter';
-declare module 'dayjs' {
+type FUnitType = QUnitType | "financialYear" | "financialQuarter";
+declare module "dayjs" {
   interface Dayjs {
     financialQuarter(): number;
 
     financialYear(): number;
+
+    financialMonth(): number;
 
     startOf(unit: FUnitType): Dayjs;
 
