@@ -11,6 +11,7 @@ dayjs.extend(FinancialYearQuarter())
 ### Usage
 ```js
 dayjs("2022-03-08").financialYear();                          // 2021
+dayjs("2022-03-08").financialMonth();                         // 12
 dayjs("2022-03-08").financialQuarter();                       // 4
 dayjs("2022-03-08").startOf("financialYear");                 // dayjs("2021-01-01")
 dayjs("2022-03-08").endOf("financialYear");                   // dayjs("2023-03-31")

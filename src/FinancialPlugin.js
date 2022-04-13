@@ -12,6 +12,12 @@ export default (financialStartMonth=4) => {
       return quarter === 4 ? this.year() - 1 : this.year();
     };
 
+    dayjsClass.prototype.financialMonth = function () {
+      const currentMonth = this.month() + 1;
+      const offset = currentMonth - financialStartMonth;
+      return offset < 0 ? 13 + offset : offset + 1;
+    };
+
     const oldStartOf = dayjsClass.prototype.startOf;
     dayjsClass.prototype.startOf = function (units, startOf) {
       if (units === "financialYear") {
