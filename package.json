@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.4",
     "c8": "^7.11.0",
@@ -53,8 +54,5 @@
     "esbuild": "^0.14.31",
     "semantic-release": "^19.0.2",
     "vitest": "^0.8.4"
-  },
-  "dependencies": {
-    "@semantic-release/changelog": "^6.0.1"
   }
 }
