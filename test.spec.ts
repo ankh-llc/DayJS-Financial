@@ -260,3 +260,27 @@ describe("financial plugin @ january", () => {
     );
   });
 });
+
+/**
+ * August Based
+ */
+describe("financial plugin @ august", () => {
+  beforeAll(() => {
+    dayjs.extend(plugin(8));
+  });
+
+  test.concurrent("startOf financialQuarter", () => {
+    const testDateString = '2022-08-01'
+    let actual, expected;
+    actual = dayjs(testDateString, 'YYYY-MM-DD').startOf("financialQuarter").toISOString();
+    expected = dayjs("2022-08-01",'YYYY-MM-DD').startOf("day").toISOString();
+    expect(actual).toBe(expected);
+  });
+
+  test.concurrent("endOf financialQuarter", () => {
+    let actual, expected;
+    actual = dayjs("2022-08-01", 'YYYY-MM-DD').endOf("financialQuarter").toISOString();
+    expected = dayjs("2022-10-31",'YYYY-MM-DD').endOf("day").toISOString();
+    expect(actual).toBe(expected);
+  });
+});
